@@ -16,6 +16,7 @@ group :omnibus do
   gem "appbundler"
   gem "ed25519" # ed25519 ssh key support done here as its a native gem we can't put in the gemspec
   gem "bcrypt_pbkdf" # ed25519 ssh key support done here as its a native gem we can't put in the gemspec
+  gem "unf_ext", "~> 0.0.7.6" # without this bundler currently resolves unf_ext to 0.0.7.2 which fails to compile on ubuntu aarch64
 end
 
 group :test do
