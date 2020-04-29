@@ -332,7 +332,7 @@ module Inspec
       input_name = @__rule_id # TODO: control ID slugging
       registry = Inspec::InputRegistry.instance
       input = registry.inputs_by_profile.dig(__profile_id, input_name)
-      return unless input
+      return unless is_waiver?(input)
 
       # An InSpec Input is a datastructure that tracks a profile parameter
       # over time. Its value can be set by many sources, and it keeps a
@@ -371,6 +371,10 @@ module Inspec
       @__skip_rule[:type] = :waiver
       @__skip_rule[:message] = __waiver_data["justification"]
       __waiver_data["skipped_due_to_waiver"] = true
+    end
+
+    def is_waiver?(input)
+      input && input.value.is_a?(Hash)
     end
 
     #

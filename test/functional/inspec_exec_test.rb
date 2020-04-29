@@ -214,6 +214,15 @@ Test Summary: 0 successful, 0 failures, 0 skipped
     assert_exit_code 0, out
   end
 
+  it "can execute when control namespace clashes with input" do
+    inspec("exec " + namespace_clash_control + " --no-create-lockfile")
+
+    _(stdout).wont_include("Control Source Code Error")
+    _(stdout).must_include "\nProfile Summary: 1 successful control, 0 control failures, 0 controls skipped\n"
+    _(stderr).must_equal ""
+    assert_exit_code 0, out
+  end
+
   it "does not vendor profiles when using the a local path dependecy" do
     Dir.mktmpdir do |tmpdir|
       command = "exec " + inheritance_profile + " --no-create-lockfile " \
@@ -224,8 +233,8 @@ Test Summary: 0 successful, 0 failures, 0 skipped
         _(stdout).must_include "No tests executed."
         assert_exit_code 1, out
       else
-        _(stdout).must_include "Profile Summary: 2 successful controls, 0 control failures, 0 controls skipped\n"
-        _(stdout).must_include "Test Summary: 5 successful, 0 failures, 0 skipped\n"
+        _(stdout).must_include "Profile Summary: 3 successful controls, 0 control failures, 0 controls skipped\n"
+        _(stdout).must_include "Test Summary: 6 successful, 0 failures, 0 skipped\n"
         assert_exit_code 0, out
       end
 
