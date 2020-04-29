@@ -51,7 +51,7 @@ describe "inspec json" do
     end
 
     it "has controls" do
-      _(json["controls"].length).must_equal 5
+      _(json["controls"].length).must_equal 4
     end
 
     describe "a control" do
@@ -108,7 +108,7 @@ describe "inspec json" do
 
     hm = JSON.load(File.read(dst.path))
     _(hm["name"]).must_equal "profile"
-    _(hm["controls"].length).must_equal 5
+    _(hm["controls"].length).must_equal 4
 
     _(out.stderr).must_equal ""
 

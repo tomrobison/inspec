@@ -176,8 +176,8 @@ describe "inspec exec with json formatter" do
         "summary" => "Demonstrates the use of InSpec Compliance Profile",
         "version" => "1.0.0",
         "supports" => [{ "platform-family" => "unix" }, { "platform-family" => "windows" }],
-        "attributes" => [{"name"=>"my_control", "options"=>{"value"=>"false"}}],
-        "status" => "loaded"
+        "status" => "loaded",
+        "attributes" => [],
       })
 
       _(groups.sort_by { |x| x["id"] }).must_equal([
@@ -193,8 +193,8 @@ describe "inspec exec with json formatter" do
       ])
     end
 
-    it "must have 5 controls" do
-      _(controls.length).must_equal 5
+    it "must have 4 controls" do
+      _(controls.length).must_equal 4
     end
 
     it "has an id for every control" do

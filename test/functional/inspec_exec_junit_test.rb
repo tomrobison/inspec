@@ -47,7 +47,7 @@ describe "inspec exec with junit formatter" do
       end
 
       it "has the tests attribute with 5 total tests" do
-        _(suite.attribute("tests").value).must_equal "5"
+        _(suite.attribute("tests").value).must_equal "4"
       end
 
       it "has the failures attribute with 0 total tests" do
