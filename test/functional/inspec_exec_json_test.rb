@@ -176,11 +176,14 @@ describe "inspec exec with json formatter" do
         "summary" => "Demonstrates the use of InSpec Compliance Profile",
         "version" => "1.0.0",
         "supports" => [{ "platform-family" => "unix" }, { "platform-family" => "windows" }],
-        "attributes" => [{"name"=>"my_control", "options"=>{"value"=>"false"}}],
-        "status" => "loaded"
+        "attributes" => [{ "name" => "my_control", "options" => { "value"=>"false" } }],
+        "status" => "loaded",
       })
 
       _(groups.sort_by { |x| x["id"] }).must_equal([
+        { "id"=>"controls/example-namespace-clash.rb",
+          "controls"=>["my_control"],
+          "title"=>"Namespace clashing control"},
         { "id" => "controls/example-tmp.rb",
           "title" => "/ profile",
           "controls" => ["tmp-1.0", key] },
