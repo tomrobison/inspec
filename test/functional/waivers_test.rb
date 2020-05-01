@@ -88,6 +88,19 @@ describe "waivers" do
     end
   end
 
+  describe "an input and control with the same name" do
+    # This is a test for a regression articulated here:
+    # https://github.com/inspec/inspec/issues/4936
+    it "can execute when control namespace clashes with input" do
+      inspec("exec " + "#{waivers_profiles_path}/namespace-clash" + " --no-create-lockfile")
+
+      _(stdout).wont_include("Control Source Code Error")
+      _(stdout).must_include "\nProfile Summary: 1 successful control, 0 control failures, 0 controls skipped\n"
+      _(stderr).must_equal ""
+      assert_exit_code 0, out
+    end
+  end
+
   describe "an inherited profile" do
     let(:profile_name) { "waiver-wrapper" }
     let(:waiver_file) { "waivers.yaml" }
