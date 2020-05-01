@@ -224,7 +224,7 @@ Test Summary: 0 successful, 0 failures, 0 skipped
         _(stdout).must_include "No tests executed."
         assert_exit_code 1, out
       else
-        _(stdout).must_include "Profile Summary: 3 successful controls, 0 control failures, 0 controls skipped\n"
+        _(stdout).must_include "Profile Summary: 2 successful controls, 0 control failures, 0 controls skipped\n"
         _(stdout).must_include "Test Summary: 6 successful, 0 failures, 0 skipped\n"
         assert_exit_code 0, out
       end

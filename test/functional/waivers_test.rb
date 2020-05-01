@@ -10,6 +10,25 @@ describe "waivers" do
   let(:controls_by_id)        { run_result; @json.dig("profiles", 0, "controls").map { |c| [c["id"], c] }.to_h }
   let(:cmd)                   { "exec #{waivers_profiles_path}/#{profile_name} --input-file #{waivers_profiles_path}/#{profile_name}/files/#{waiver_file}" }
 
+  attr_accessor :out
+
+  def inspec(commandline, prefix = nil)
+    @stdout = @stderr = nil
+    self.out = super
+  end
+
+  def stdout
+    @stdout ||= out.stdout
+      .force_encoding(Encoding::UTF_8)
+      .gsub(/\e\[(\d+)(;\d+)*m/, "") # strip ANSI color codes
+  end
+
+  def stderr
+    @stderr ||= out.stderr
+      .force_encoding(Encoding::UTF_8)
+      .gsub(/\e\[(\d+)(;\d+)*m/, "") # strip ANSI color codes
+  end
+
   def assert_test_outcome(expected, control_id)
     assert_equal expected, controls_by_id.dig(control_id, "results", 0, "status")
   end

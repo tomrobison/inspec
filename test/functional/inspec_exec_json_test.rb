@@ -176,14 +176,11 @@ describe "inspec exec with json formatter" do
         "summary" => "Demonstrates the use of InSpec Compliance Profile",
         "version" => "1.0.0",
         "supports" => [{ "platform-family" => "unix" }, { "platform-family" => "windows" }],
-        "attributes" => [{ "name" => "my_control", "options" => { "value"=>"false" } }],
+        "attributes" => [],
         "status" => "loaded",
       })
 
       _(groups.sort_by { |x| x["id"] }).must_equal([
-        { "id"=>"controls/example-namespace-clash.rb",
-          "controls"=>["my_control"],
-          "title"=>"Namespace clashing control"},
         { "id" => "controls/example-tmp.rb",
           "title" => "/ profile",
           "controls" => ["tmp-1.0", key] },
@@ -197,7 +194,7 @@ describe "inspec exec with json formatter" do
     end
 
     it "must have 5 controls" do
-      _(controls.length).must_equal 5
+      _(controls.length).must_equal 4
     end
 
     it "has an id for every control" do
