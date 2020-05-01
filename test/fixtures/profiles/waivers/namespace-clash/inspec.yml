@@ -1,4 +1,4 @@
-name: only_if
+name: namespace-clash
 summary: Verifies input and control namespace can safely clash
 version: 0.1.0
 supports:
