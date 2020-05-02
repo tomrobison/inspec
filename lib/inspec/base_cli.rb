@@ -118,6 +118,8 @@ module Inspec
         desc: "Disable SSL verification on select targets"
       option :target_id, type: :string,
         desc: "Provide a ID which will be included on reports"
+      option :ssh_auth_methods, type: :array,
+        desc: 'SSH Authentication Methods, e.g. publickey or password)'
     end
 
     def self.profile_options
